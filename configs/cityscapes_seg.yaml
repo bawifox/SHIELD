@@ -1,0 +1,55 @@
+# Model configuration
+model:
+  name: "SegFormerB2"
+  num_classes: 19
+  in_channels: 3
+  pretrained: null
+  decoder_dim: 768
+
+# Dataset configuration
+dataset:
+  name: "Cityscapes"
+  data_root: "cityscapes"
+  img_size: [512, 1024]
+  crop_size: [256, 512]
+
+# Training configuration
+train:
+  num_epochs: 100
+  batch_size: 4
+  num_workers: 2
+  accumulation_steps: 1
+
+# Optimizer configuration
+optimizer:
+  type: "AdamW"
+  lr: 0.0001
+  weight_decay: 0.0005
+
+# Scheduler configuration
+scheduler:
+  type: "PolynomialLR"
+  power: 0.9
+
+# Loss configuration
+loss:
+  name: "CrossEntropyLoss"
+  ignore_index: 255
+
+# Auxiliary loss configuration (optional)
+auxiliary_loss:
+  enabled: false
+  weights: [0.0, 0.0, 0.0, 0.0]
+
+# Device configuration
+device: "cuda"
+
+# Checkpoint configuration
+checkpoint:
+  save_dir: "checkpoints/cityscapes"
+  save_interval: 5
+
+# Logging configuration
+logging:
+  log_dir: "logs/cityscapes"
+  print_interval: 50

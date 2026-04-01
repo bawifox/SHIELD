@@ -1,0 +1,50 @@
+model:
+  name: "AnomalySegmentation"
+  in_channels: 3
+
+anomaly_model:
+  decoder_dim: 256
+  pretrained_backbone_path: "checkpoints/cityscapes/backbone_weights.pth"
+
+dataset:
+  data_root: "train_set"
+
+anomaly_dataset:
+  data_root: "train_set"
+  img_dir: "synthetic_images"
+  mask_dir: "synthetic_masks"
+  mask_thresh: 1
+  use_flat_dir: true
+  train_ratio: 0.9
+
+train:
+  num_epochs: 100
+  batch_size: 4
+  num_workers: 0  # 设为0避免多进程死锁问题
+  val_interval: 1  # 每个epoch都验证，方便debug
+  max_val_batches: 10  # 最多验证10个batch
+
+optimizer:
+  type: "AdamW"
+  lr: 0.0001
+  weight_decay: 0.0005
+
+scheduler:
+  type: "PolynomialLR"
+  power: 0.9
+
+loss:
+  name: "AnomalyBCEDiceLoss"
+  bce_weight: 0.5
+  dice_weight: 0.5
+  coarse_weight: 0.3
+  final_weight: 0.7
+
+checkpoint:
+  save_dir: "checkpoints/anomaly"
+  save_interval: 5
+
+logging:
+  log_dir: "logs/anomaly"
+
+device: "cuda:0"

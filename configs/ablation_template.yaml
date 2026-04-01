@@ -1,0 +1,105 @@
+# =============================================================================
+# SHIELD-Lite Ablation Study Configuration Template
+# =============================================================================
+# 使用方式:
+#   1. 选择预设: 设置 _ablation_name 为预设名称
+#   2. 或手动配置: 设置各组件开关
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 预设配置 (选择其中一个)
+# -----------------------------------------------------------------------------
+_ablation_name: "full_shield_lite"  # 可选: baseline, coarse_only, with_candidates, with_hazard, 
+                                     #       with_adaptive_threshold, with_prior_add, with_prior_attention,
+                                     #       full_shield_lite, full_concat
+
+# -----------------------------------------------------------------------------
+# 手动配置 (覆盖预设)
+# -----------------------------------------------------------------------------
+ablation:
+  # 小候选区域提取 (从 coarse map 中提取小目标候选)
+  enable_small_candidate_extraction: true
+  
+  # 文本引导的危险评分 (使用 CLIP 文本嵌入)
+  enable_text_guided_hazard: false
+  
+  # 自适应阈值偏移 Delta_t
+  enable_adaptive_threshold: true
+  
+  # 小目标先验 refinement
+  enable_small_hazard_prior: true
+  
+  # Prior 融合方式
+  prior_fusion_mode: "add"  # add, concat, attention, multiply
+  
+  # Hazard score 计算方式
+  hazard_score_type: "area"  # area, visual, text, hybrid
+
+# -----------------------------------------------------------------------------
+# Loss 权重
+# -----------------------------------------------------------------------------
+loss:
+  lambda_coarse: 0.5
+  lambda_hazard: 0.5
+  
+  # BCE/Dice 权重
+  bce_weight: 0.5
+  dice_weight: 0.5
+
+# -----------------------------------------------------------------------------
+# 候选区域提取参数
+# -----------------------------------------------------------------------------
+candidate:
+  threshold_high: 0.5
+  threshold_small: 0.3
+  tau_small: 500
+  local_response_thresh: 0.6
+  max_candidates: 10
+  min_area: 50
+
+# -----------------------------------------------------------------------------
+# Hazard Scorer 参数
+# -----------------------------------------------------------------------------
+hazard_scorer:
+  hazard_beta: 10.0
+  base_threshold: 0.01
+  use_soft_gate: true
+
+# =============================================================================
+# 详细配置说明
+# =============================================================================
+#
+# 各组件说明:
+#   1. enable_small_candidate_extraction:
+#      - 从 coarse anomaly probability map 中提取小目标候选区域
+#      - 用于后续 hazard scoring 和 prior 生成
+#      - 需要 candidate extractor
+#
+#   2. enable_text_guided_hazard:
+#      - 使用 CLIP 文本嵌入引导 hazard score 计算
+#      - 需要 text embeddings (normal vs anomaly prompts)
+#      - 设为 false 时使用 visual/area features
+#
+#   3. enable_adaptive_threshold:
+#      - 启用 Delta_t (阈值偏移) 的学习
+#      - 根据图像内容动态调整二值化阈值
+#      - 需要 hazard scorer 模块
+#
+#   4. enable_small_hazard_prior:
+#      - 基于 hazard scores 生成 small-hazard prior
+#      - 融入 final decoder 提升小目标检测
+#      - 需要 prior_generator 模块
+#
+#   5. prior_fusion_mode:
+#      - add: 简单相加 (prior + features)
+#      - concat: 通道拼接 (prior | features)
+#      - attention: 注意力机制融合
+#      - multiply: 逐元素相乘
+#
+#   6. hazard_score_type:
+#      - area: 仅使用候选区域面积比例
+#      - visual: 使用视觉特征 (推荐)
+#      - text: 使用文本嵌入相似度
+#      - visual + text: 混合使用
+#
+# =============================================================================
