@@ -1,4 +1,4 @@
-# SHIELD: Small-Hazard Prior for Road Scene Anomaly Segmentation
+# SHIELD: Region-to-Pixel Hazard Reasoning
 
 ## Overview
 
@@ -106,4 +106,19 @@ This project is released under the Apache 2.0 License.
 
 ## Acknowledgments
 
-This project builds upon [SegFormer](https://github.com/NVIDIA/SegFormer) and [Mask2Anomaly](https://github.com/iro-cp/Mask2Anomaly). We thank the authors for their excellent work.
+This project builds upon [SegFormer](https://github.com/NVIDIA/SegFormer) and [CityScape](https://github.com/mcordts/cityscapesScripts). We thank the authors for their excellent work.
+```
+@article{xie2021segformer,
+  title={SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers},
+  author={Xie, Enze and Wang, Wenhai and Yu, Zhiding and Anandkumar, Anima and Alvarez, Jose M and Luo, Ping},
+  journal=NeurIPs,
+  volume={34},
+  year={2021}
+}
+@inproceedings{cordts2016cityscapes,
+  author    = {Cordts, Marius and Omran, Mohamed and Ramos, Sebastian and Rehfeld, Timo and Enzweiler, Markus and Benenson, Rodrigo and Franke, Uwe and Roth, Stefan and Schiele, Bernt},
+  title     = {The cityscapes dataset for semantic urban scene understanding},
+  booktitle = CVPR,
+  year      = {2016}
+}
+```
