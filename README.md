@@ -2,8 +2,6 @@
 
 ## Overview
 
-SHIELD (Small-Hazard prIor for Road scene anomaly sEgmentation with Mixed-scaLe Detection) is a novel framework for road scene anomaly segmentation, with a particular focus on detecting small-scale anomalous objects in mixed-scale scenarios. This repository contains the PyTorch implementation of SHIELD-Lite.
-
 <img width="1399" height="610" alt="db762174e236b9c8b4c92130cef0107f" src="https://github.com/user-attachments/assets/76bfea50-23cb-40e6-88e5-10ddf501287a" />
 
 ## Installation
@@ -57,7 +55,23 @@ python train_shield_lite.py --config configs/shield_lite.yaml
 # Multi-GPU (Distributed)
 bash train_shield_lite_dist.sh
 ```
+### Model Weights
 
+The pre-trained weights for SHIELD are hosted on Google Drive. Please note that the backbone network was pre-trained on the **Cityscapes** dataset.
+
+[📥 Download Weights from Google Drive](https://drive.google.com/file/d/1DylWRNCJuYPky0Zz8-v22mqBJpA_wcvg/view?usp=sharing)
+
+Place the downloaded `.pth` files into the `checkpoints/cityscapes` directory before running the code.
+
+### Preparation
+After downloading, please place the `.pth` files into their respective directories to match the expected structure:
+```text
+SHIELD/
+└── checkpoints/
+    ├── cityscapes/
+    │   └── backbone_weights.pth
+    └── shield_lite/
+        └── best.pth
 ### Evaluation
 
 ```bash
