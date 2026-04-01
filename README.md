@@ -1,54 +1,10 @@
-<<<<<<< HEAD
 # SHIELD: Small-Hazard Prior for Road Scene Anomaly Segmentation
 
 ## Overview
 
 SHIELD (Small-Hazard prIor for Road scene anomaly sEgmentation with Mixed-scaLe Detection) is a novel framework for road scene anomaly segmentation, with a particular focus on detecting small-scale anomalous objects in mixed-scale scenarios. This repository contains the PyTorch implementation of SHIELD-Lite.
 
-<p align="center">
-  <img src="assets/pipeline.png" alt="SHIELD Pipeline" width="800"/>
-</p>
-
-## Key Features
-
-- **Small-Hazard Prior**: A novel prior mechanism that enhances the detection of small anomalous objects by modeling their hazard levels
-- **Candidate Harvesting**: Intelligent extraction of candidate regions from coarse anomaly maps with adaptive thresholding
-- **Hazard Scorer**: Learns to assess the hazard level of candidate regions based on area and overlap metrics
-- **Mixed-Scale Robustness**: Maintains stable performance across both homogeneous and mixed-scale road scenes
-- **Efficient Design**: 44.2M parameters with 18.45 FPS inference speed
-
-## Method
-
-SHIELD consists of four core components:
-
-1. **Candidate Extractor**: Extracts candidate anomalous regions from the coarse prediction map using adaptive thresholding
-2. **Hazard Scorer**: Predicts hazard scores for each candidate based on area ratios and IoU with ground truth
-3. **Small Hazard Prior Generator**: Generates prior maps by weighting candidate masks with their hazard scores
-4. **Adaptive Threshold Module**: Dynamically adjusts decision thresholds based on scene complexity
-
-The final prediction is computed by fusing the coarse anomaly map with the small-hazard prior.
-
-## Experimental Results
-
-### Main Results
-
-| Method | AP_small (H/M) | delta_s | Params | FPS |
-|--------|----------------|---------|--------|-----|
-| PEBAL | 78.2 / 51.9 | 26.4 | 160.2M | 3.89 |
-| RbA | 89.8 / 83.6 | 6.1 | 95.1M | 10.16 |
-| Mask2Anomaly | 85.1 / 65.2 | 19.9 | 46.5M | 2.76 |
-| **SHIELD** | **89.9 / 84.1** | **5.8** | 44.2M | **18.45** |
-
-*H: homogeneous scenes, M: mixed-scale scenes, delta_s: performance drop from H to M*
-
-### Ablation Study
-
-| Variant | AP_small | delta_s |
-|---------|----------|---------|
-| w/o language semantics | 71.3 | 18.2 |
-| w/o candidate harvesting | 60.4 | 22.5 |
-| fixed threshold | 73.8 | 16.3 |
-| **Full model** | **84.1** | **5.8** |
+<img width="1399" height="610" alt="db762174e236b9c8b4c92130cef0107f" src="https://github.com/user-attachments/assets/76bfea50-23cb-40e6-88e5-10ddf501287a" />
 
 ## Installation
 
@@ -144,19 +100,6 @@ AnomalySegmentationModelWithPrior
     └── Prior Map Generation
 ```
 
-## Citation
-
-If you find this work helpful for your research, please cite:
-
-```bibtex
-@article{shield2026,
-  title={SHIELD: Small-Hazard Prior for Road Scene Anomaly Segmentation},
-  author={},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
-  year={2026}
-}
-```
-
 ## License
 
 This project is released under the Apache 2.0 License.
@@ -164,6 +107,3 @@ This project is released under the Apache 2.0 License.
 ## Acknowledgments
 
 This project builds upon [SegFormer](https://github.com/NVIDIA/SegFormer) and [Mask2Anomaly](https://github.com/iro-cp/Mask2Anomaly). We thank the authors for their excellent work.
-=======
-# SHIELD
->>>>>>> 92af250366256c189a78c4995a4df5893e60e2d6
