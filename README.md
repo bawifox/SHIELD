@@ -8,7 +8,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/shield.git
+git clone https://github.com/bawifox/SHIELD.git
 cd shield
 
 # Create conda environment
