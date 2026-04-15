@@ -48,6 +48,14 @@ anomaly_dataset:
 
 ### Training
 
+#### Download Dataset
+
+Download the training dataset from the following link:
+
+https://drive.google.com/file/d/1FVFuq3IW3hQw8WYj5JAIV8pcToLtxjLa/view?usp=drive_link
+
+#### Start Training
+
 ```bash
 # Single GPU
 python train_shield_lite.py --config configs/shield_lite.yaml
